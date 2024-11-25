@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.scss',
 })

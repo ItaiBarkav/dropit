@@ -1,0 +1,8 @@
+.catalog-page {
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  .catalog {
+    background-color: var(--gray-3);
+  }
+}
