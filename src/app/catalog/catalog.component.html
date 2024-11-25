@@ -1,4 +1,13 @@
 <div class="catalog-page">
   <app-header></app-header>
-  <div class="catalog">Catalog</div>
+  <div class="catalog">
+    <span class="title">Catalog Page</span>
+    <mat-divider></mat-divider>
+    <input
+      type="text"
+      class="search"
+      placeholder="Search item"
+      [formControl]="search"
+    />
+  </div>
 </div>

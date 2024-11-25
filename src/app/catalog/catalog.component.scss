@@ -3,6 +3,31 @@
   grid-template-rows: auto 1fr;
 
   .catalog {
+    padding-top: 35px;
     background-color: var(--gray-3);
+
+    .title {
+      color: var(--gray-blue);
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 45px;
+      margin-bottom: 13px;
+    }
+
+    mat-divider {
+      color: var(--gray-2);
+      height: 1.25px;
+      margin: 13px 0 24px 0;
+    }
+
+    .search {
+      background: url(../../assets/Search.svg) no-repeat left;
+      height: 31px;
+      background-color: var(--white);
+      border: 1px solid var(--gray-2);
+      border-radius: 4px;
+      padding-left: 30px;
+      width: 40%;
+    }
   }
 }
