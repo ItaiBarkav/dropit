@@ -1,13 +1,39 @@
 <div class="catalog-page">
   <app-header></app-header>
   <div class="catalog">
-    <span class="title">Catalog Page</span>
-    <mat-divider></mat-divider>
-    <input
-      type="text"
-      class="search"
-      placeholder="Search item"
-      [formControl]="search"
-    />
+    <div class="space"></div>
+    <div class="content">
+      <span class="title">Catalog Page</span>
+      <mat-divider></mat-divider>
+      <input
+        type="text"
+        class="search"
+        placeholder="Search item"
+        [formControl]="searchTerm"
+      />
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of products; track $index) {
+          <tr>
+            <th><img class="product-image" src="{{ product.image }}" /></th>
+            <th>{{ product.id }}</th>
+            <th>{{ product.title }}</th>
+            <th>{{ product.price }}$</th>
+            <th><img src="../../assets/AddToCart.svg" /></th>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="space"></div>
   </div>
 </div>
