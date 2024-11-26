@@ -1,1 +1,60 @@
-<p>cart works!</p>
+<div class="cart-page">
+  <app-header></app-header>
+  <div class="cart">
+    <div class="space"></div>
+    <div class="content">
+      <span class="title">Your cart</span>
+      <mat-divider></mat-divider>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of (products$ | async) | keyvalue; track $index) {
+          <tr>
+            <th><img class="product-image" src="{{ product.key.image }}" /></th>
+            <th>{{ product.key.title }}</th>
+            <th>{{ product.key.price }}$</th>
+            <th>
+              <app-quantity
+                [quantity]="product.value"
+                (update)="updateQuantity($event, product.key)"
+              ></app-quantity>
+            </th>
+            <th>{{ product.key.price * product.value | number : "1.2-2" }}$</th>
+            <th>
+              <img
+                class="remove-from-cart"
+                src="../../assets/Close.svg"
+                (click)="removeAllFromCart(product.key)"
+              />
+            </th>
+          </tr>
+          }
+        </tbody>
+      </table>
+
+      <div>
+        <span>Order summery</span>
+        <mat-divider></mat-divider>
+        <div>
+          <span>Subtotal</span><span>{{ price | number : "1.2-2" }}</span>
+        </div>
+        <div><span>Shipping</span><span>Free</span></div>
+        <mat-divider></mat-divider>
+        <div>
+          <span>Total</span><span>{{ price | number : "1.2-2" }}</span>
+        </div>
+        <button class="checkout">Checkout</button>
+      </div>
+    </div>
+    <div class="space"></div>
+  </div>
+</div>

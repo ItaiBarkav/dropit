@@ -22,8 +22,8 @@ export class HeaderComponent {
   }
 
   private updateProductsInCart(): void {
-    this.cartService
-      .numberOfProducts()
-      .subscribe((a) => (this.productsInCart = a));
+    this.cartService.numberOfProducts$.subscribe(
+      (numberOfProducts) => (this.productsInCart = numberOfProducts)
+    );
   }
 }

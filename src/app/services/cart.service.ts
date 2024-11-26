@@ -8,19 +8,57 @@ import { Product } from '../types/product';
 export class CartService {
   private _products$ = new BehaviorSubject<Map<Product, number>>(new Map());
   private _numberOfProducts$ = new BehaviorSubject(0);
+  private _price$ = new BehaviorSubject(0);
 
   constructor() {}
 
-  add(product: Product): void {
-    if (!this._products$.value.has(product)) {
-      this._numberOfProducts$.next(this._numberOfProducts$.value + 1);
-    }
-
-    const productCount = this._products$.value.get(product) ?? 0;
-    this._products$.value.set(product, productCount + 1);
+  get products$(): Observable<Map<Product, number>> {
+    return this._products$.asObservable();
   }
 
-  numberOfProducts(): Observable<number> {
+  get numberOfProducts$(): Observable<number> {
     return this._numberOfProducts$.asObservable();
+  }
+
+  get price$(): Observable<number> {
+    return this._price$.asObservable();
+  }
+
+  add(product: Product): void {
+    const productCount = this._products$.value.get(product) ?? 0;
+    this._products$.value.set(product, productCount + 1);
+
+    this._numberOfProducts$.next(this._numberOfProducts$.value + 1);
+    this._price$.next(this._price$.value + product.price);
+  }
+
+  removeAll(product: Product): void {
+    const quantity = this._products$.value.get(product);
+    this._products$.value.delete(product);
+
+    this._numberOfProducts$.next(this._numberOfProducts$.value - quantity!);
+    this._price$.next(this._price$.value - product.price * quantity!);
+  }
+
+  remove(product: Product): void {
+    this._products$.value.delete(product);
+
+    this._numberOfProducts$.next(this._numberOfProducts$.value - 1);
+    this._price$.next(this._price$.value - product.price!);
+  }
+
+  updateQuantity(product: Product, quantity: number): void {
+    const productQuantity = this._products$.value.get(product);
+
+    this._numberOfProducts$.next(
+      this._numberOfProducts$.value - productQuantity! + quantity
+    );
+    this._price$.next(
+      this._price$.value -
+        product.price * productQuantity! +
+        product.price * quantity
+    );
+
+    this._products$.value.set(product, quantity);
   }
 }
