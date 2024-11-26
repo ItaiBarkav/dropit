@@ -1,5 +1,6 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -38,6 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCheckboxModule,
     ScrollingModule,
     MatFormFieldModule,
+    MatBadgeModule,
   ],
   exports: [
     MatInputModule,
@@ -58,6 +60,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCheckboxModule,
     ScrollingModule,
     MatFormFieldModule,
+    MatBadgeModule,
   ],
 })
 export class MaterialModule {}

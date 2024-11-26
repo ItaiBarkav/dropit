@@ -1,5 +1,15 @@
+@use "@angular/material" as mat;
+
 .header {
   display: flex;
   padding: 13px 24px;
   justify-content: space-between;
+
+  .cart {
+    cursor: pointer;
+  }
+
+  .mat-badge-content {
+    background: var(--green);
+  }
 }

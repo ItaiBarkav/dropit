@@ -4,6 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { MaterialModule } from '../material.module';
+import { CartService } from '../services/cart.service';
 import { ProductsService } from '../services/products.service';
 import { Product } from '../types/product';
 
@@ -20,9 +21,16 @@ export class CatalogComponent {
 
   private originProducts$ = new BehaviorSubject<Product[]>([]);
 
-  constructor(private productsService: ProductsService) {
+  constructor(
+    private productsService: ProductsService,
+    private cartService: CartService
+  ) {
     this.initOriginProducts();
     this.search();
+  }
+
+  addToCart(product: Product): void {
+    this.cartService.add(product);
   }
 
   private initOriginProducts(): void {

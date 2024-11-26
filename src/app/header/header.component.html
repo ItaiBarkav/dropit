@@ -1,4 +1,12 @@
 <div class="header">
   <img src="../../assets/Logo.png" />
-  <img src="../../assets/Cart.svg" />
+  <div
+    class="cart"
+    matBadge="{{ productsInCart }}"
+    matBadgeSize="small"
+    [matBadgeHidden]="productsInCart === 0"
+    (click)="goToCart()"
+  >
+    <img src="../../assets/Cart.svg" />
+  </div>
 </div>

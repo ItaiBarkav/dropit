@@ -28,7 +28,13 @@
             <th>{{ product.id }}</th>
             <th>{{ product.title }}</th>
             <th>{{ product.price }}$</th>
-            <th><img src="../../assets/AddToCart.svg" /></th>
+            <th>
+              <img
+                class="add-to-cart"
+                src="../../assets/AddToCart.svg"
+                (click)="addToCart(product)"
+              />
+            </th>
           </tr>
           }
         </tbody>
