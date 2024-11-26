@@ -44,7 +44,7 @@ export class CartComponent {
     checkoutDialogRef
       .afterClosed()
       .pipe(map(() => this.router.navigateByUrl('/')))
-      .subscribe();
+      .subscribe(() => this.cartService.reset());
   }
 
   private updatePrice(): void {

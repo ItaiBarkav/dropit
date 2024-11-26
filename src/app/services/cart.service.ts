@@ -8,11 +8,17 @@ import { Product } from '../types/product';
   providedIn: 'root',
 })
 export class CartService {
-  private _products$ = new BehaviorSubject<Map<Product, number>>(new Map());
+  private readonly PRODUCTS = 'products';
+
+  private _products$ = new BehaviorSubject<Map<Product, number>>(
+    new Map(JSON.parse(localStorage.getItem(this.PRODUCTS)!))
+  );
   private _numberOfProducts$ = new BehaviorSubject(0);
   private _price$ = new BehaviorSubject(0);
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.productsSubscription();
+  }
 
   get products$(): Observable<Map<Product, number>> {
     return this._products$.asObservable();
@@ -28,40 +34,21 @@ export class CartService {
 
   add(product: Product): void {
     const productCount = this._products$.value.get(product) ?? 0;
-    this._products$.value.set(product, productCount + 1);
-
-    this._numberOfProducts$.next(this._numberOfProducts$.value + 1);
-    this._price$.next(this._price$.value + product.price);
+    this._products$.next(this._products$.value.set(product, productCount + 1));
   }
 
   removeAll(product: Product): void {
-    const quantity = this._products$.value.get(product);
     this._products$.value.delete(product);
-
-    this._numberOfProducts$.next(this._numberOfProducts$.value - quantity!);
-    this._price$.next(this._price$.value - product.price * quantity!);
+    this._products$.next(this._products$.value);
   }
 
   remove(product: Product): void {
     this._products$.value.delete(product);
-
-    this._numberOfProducts$.next(this._numberOfProducts$.value - 1);
-    this._price$.next(this._price$.value - product.price!);
+    this._products$.next(this._products$.value);
   }
 
   updateQuantity(product: Product, quantity: number): void {
-    const productQuantity = this._products$.value.get(product);
-
-    this._numberOfProducts$.next(
-      this._numberOfProducts$.value - productQuantity! + quantity
-    );
-    this._price$.next(
-      this._price$.value -
-        product.price * productQuantity! +
-        product.price * quantity
-    );
-
-    this._products$.value.set(product, quantity);
+    this._products$.next(this._products$.value.set(product, quantity));
   }
 
   submit(): void {
@@ -79,5 +66,26 @@ export class CartService {
         checkout
       )
       .subscribe();
+  }
+
+  reset(): void {
+    this._products$.next(new Map());
+  }
+
+  private productsSubscription(): void {
+    this._products$.subscribe((products) => {
+      this._numberOfProducts$.next(
+        Array.from(products.values()).reduce((acc, value) => acc + value, 0)
+      );
+
+      this._price$.next(
+        Array.from(products.entries()).reduce(
+          (total, [{ price }, quantity]) => total + price * quantity,
+          0
+        )
+      );
+
+      localStorage.setItem(this.PRODUCTS, JSON.stringify([...products]));
+    });
   }
 }
