@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Checkout } from '../types/checkout';
 import { Product } from '../types/product';
 
 @Injectable({
@@ -10,7 +12,7 @@ export class CartService {
   private _numberOfProducts$ = new BehaviorSubject(0);
   private _price$ = new BehaviorSubject(0);
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   get products$(): Observable<Map<Product, number>> {
     return this._products$.asObservable();
@@ -60,5 +62,22 @@ export class CartService {
     );
 
     this._products$.value.set(product, quantity);
+  }
+
+  submit(): void {
+    let checkout: Checkout = {
+      items: [],
+    };
+
+    this._products$.value.forEach((quantity, { id }) =>
+      checkout.items.push({ productId: id, quantity })
+    );
+
+    this.httpClient
+      .post(
+        'https://private-anon-7fed260f5a-droptask.apiary-mock.com/checkout',
+        checkout
+      )
+      .subscribe();
   }
 }

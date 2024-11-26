@@ -1,5 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
+import { CheckoutDialogComponent } from '../checkout-dialog/checkout-dialog.component';
 import { HeaderComponent } from '../header/header.component';
 import { MaterialModule } from '../material.module';
 import { QuantityComponent } from '../quantity/quantity.component';
@@ -17,7 +21,11 @@ export class CartComponent {
   products$ = this.cartService.products$;
   price = 0;
 
-  constructor(private cartService: CartService) {
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private matDialog: MatDialog
+  ) {
     this.updatePrice();
   }
 
@@ -27,6 +35,16 @@ export class CartComponent {
 
   updateQuantity(quantity: number, product: Product): void {
     this.cartService.updateQuantity(product, quantity);
+  }
+
+  openDialog(): void {
+    this.cartService.submit();
+
+    const checkoutDialogRef = this.matDialog.open(CheckoutDialogComponent);
+    checkoutDialogRef
+      .afterClosed()
+      .pipe(map(() => this.router.navigateByUrl('/')))
+      .subscribe();
   }
 
   private updatePrice(): void {

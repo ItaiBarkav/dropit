@@ -52,7 +52,7 @@
         <div>
           <span>Total</span><span>{{ price | number : "1.2-2" }}</span>
         </div>
-        <button class="checkout">Checkout</button>
+        <button class="checkout" (click)="openDialog()">Checkout</button>
       </div>
     </div>
     <div class="space"></div>
