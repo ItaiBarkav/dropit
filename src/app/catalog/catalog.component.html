@@ -3,7 +3,7 @@
   <div class="catalog">
     <div class="space"></div>
     <div class="content">
-      <span class="title">Catalog Page</span>
+      <span class="title">Catalog <span class="page">Page</span></span>
       <mat-divider></mat-divider>
       <input
         type="text"
@@ -39,6 +39,24 @@
           }
         </tbody>
       </table>
+
+      <div class="card-container">
+        @for (product of products; track $index) {
+        <div class="card">
+          <img class="product-image" src="{{ product.image }}" />
+          <div class="info">
+            <span>{{ product.id }}</span>
+            <span>{{ product.title }}</span>
+            <span>{{ product.price }}$</span>
+          </div>
+          <img
+            class="add-to-cart"
+            src="../../assets/AddToCart.svg"
+            (click)="addToCart(product)"
+          />
+        </div>
+        }
+      </div>
     </div>
     <div class="space"></div>
   </div>
