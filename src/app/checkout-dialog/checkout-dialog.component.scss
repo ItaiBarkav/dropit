@@ -26,6 +26,11 @@
     line-height: 21px;
   }
 
+  mat-divider {
+    background: var(--gray-3);
+    width: 100%;
+  }
+
   .see-ya {
     padding: 30px 0;
     color: var(--green);
