@@ -38,11 +38,10 @@
 
       .search {
         background: url(../../assets/Search.svg) no-repeat left;
-        height: 31px;
         background-color: var(--white);
         border: 1px solid var(--gray-2);
         border-radius: 4px;
-        padding-left: 30px;
+        padding: 8px 0 8px 30px;
         width: 50%;
         margin-bottom: 24px;
       }
@@ -50,6 +49,48 @@
       .table {
         display: block;
         overflow-y: auto;
+        background: var(--white);
+        border: 1px solid var(--gray-2);
+        border-radius: 4px;
+        padding-left: 24px;
+        font-size: 14px;
+        line-height: 21px;
+        text-align: left;
+        border-collapse: collapse;
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          background: var(--gray-1);
+        }
+
+        .header {
+          font-weight: 700;
+          color: var(--gray-blue);
+
+          th {
+            width: 20%;
+            padding-right: 16px;
+          }
+        }
+
+        .body {
+          tr:nth-child(even) {
+            background-color: var(--white);
+          }
+
+          tr:nth-child(odd) {
+            background-color: var(--gray-4);
+          }
+
+          th {
+            font-weight: 400;
+            color: var(--gray-1);
+          }
+        }
 
         .product-image {
           width: 35px;
