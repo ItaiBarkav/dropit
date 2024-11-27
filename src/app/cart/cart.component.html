@@ -45,6 +45,35 @@
             }
           </tbody>
         </table>
+
+        <div class="cart-mobile">
+          @for (product of (products$ | async) | keyvalue; track $index) {
+          <div class="card">
+            <img class="product-image" src="{{ product.key.image }}" />
+            <div class="info">
+              <span>{{ product.key.title }}</span>
+              <span>{{ product.key.price }}$</span>
+              <app-quantity
+                class="quantity"
+                [quantity]="product.value"
+                (update)="updateQuantity($event, product.key)"
+              ></app-quantity>
+            </div>
+            <div class="close-total">
+              <img
+                class="remove-from-cart"
+                src="../../assets/Close.svg"
+                (click)="removeAllFromCart(product.key)"
+              />
+              <span class="total">
+                Total:
+                {{ product.key.price * product.value | number : "1.2-2" }}$
+              </span>
+            </div>
+          </div>
+          }
+        </div>
+
         <div class="order-summery-checkout">
           <div class="order-summery">
             <span class="title">Order summery</span>

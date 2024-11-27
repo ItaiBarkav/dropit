@@ -37,6 +37,7 @@
       .summery {
         display: flex;
         gap: 12px;
+        overflow-y: auto;
 
         .table {
           display: block;
@@ -80,11 +81,6 @@
               padding-right: 16px;
             }
 
-            .product-image {
-              width: 35px;
-              height: 35px;
-            }
-
             .total {
               font-weight: 700;
               color: var(--gray-blue);
@@ -94,6 +90,15 @@
               cursor: pointer;
             }
           }
+        }
+
+        .product-image {
+          width: 65px;
+          height: 65px;
+        }
+
+        .cart-mobile {
+          display: none;
         }
 
         .order-summery-checkout {
@@ -136,6 +141,94 @@
             color: var(--white);
             font-weight: 700;
             padding: 10px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cart-page {
+    .cart {
+      .space {
+        flex: 1 1 10%;
+      }
+
+      .content {
+        .title {
+          font-size: 16px;
+          line-height: 24px;
+        }
+
+        .summery {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          overflow-y: scroll;
+
+          .table {
+            display: none;
+          }
+
+          .cart-mobile {
+            display: flex;
+            flex-direction: column;
+
+            .card {
+              display: flex;
+              background: var(--white);
+              border: 1px solid var(--gray-2);
+              border-radius: 4px;
+              padding: 16px;
+              margin-bottom: 8px;
+
+              .info {
+                display: flex;
+                flex-direction: column;
+                margin-left: 13px;
+                width: 100%;
+                color: var(--gray-1);
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 21px;
+
+                .quantity {
+                  margin-top: 10px;
+                }
+              }
+
+              .close-total {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .remove-from-cart {
+                  display: flex;
+                  position: relative;
+                  align-self: flex-end;
+                }
+
+                .total {
+                  width: max-content;
+                  color: var(--gray-blue);
+                  font-size: 14px;
+                  font-weight: 700;
+                  line-height: 21px;
+                }
+              }
+            }
+          }
+
+          .order-summery-checkout {
+            .order-summery {
+              padding: 24px;
+
+              .total {
+                margin: 24px -24px 8px -24px;
+                padding: 32px 24px 0 24px;
+              }
+            }
           }
         }
       }
