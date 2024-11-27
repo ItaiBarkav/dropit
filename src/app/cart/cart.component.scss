@@ -36,22 +36,110 @@
         margin: 13px 0 24px 0;
       }
 
-      .table {
-        display: block;
-        overflow-y: auto;
+      .summery {
+        display: flex;
+        gap: 12px;
 
-        .product-image {
-          width: 35px;
-          height: 35px;
+        .table {
+          display: block;
+          overflow-y: auto;
+          background: var(--white);
+          border: 1px solid var(--gray-2);
+          border-radius: 4px;
+          padding: 0 24px;
+          font-size: 14px;
+          line-height: 21px;
+          text-align: left;
+          border-collapse: collapse;
+
+          &::-webkit-scrollbar {
+            width: 4px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: var(--gray-1);
+          }
+
+          .header {
+            font-weight: 700;
+            color: var(--gray-blue);
+
+            th {
+              width: 25%;
+              padding: 16px 0;
+            }
+          }
+
+          .body {
+            tr {
+              border-top: 1px solid var(--gray-3);
+            }
+
+            th {
+              font-weight: 400;
+              color: var(--gray-1);
+              padding-right: 16px;
+            }
+
+            .product-image {
+              width: 35px;
+              height: 35px;
+            }
+
+            .total {
+              font-weight: 700;
+              color: var(--gray-blue);
+            }
+
+            .remove-from-cart {
+              cursor: pointer;
+            }
+          }
         }
 
-        .remove-from-cart {
-          cursor: pointer;
-        }
-      }
+        .order-summery-checkout {
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 33%;
+          gap: 16px;
 
-      .checkout {
-        background: var(--green);
+          .order-summery {
+            background: var(--white);
+            border: 1px solid var(--gray-2);
+            border-radius: 4px;
+            padding: 0 24px;
+            color: var(--gray-blue);
+            line-height: 24px;
+            font-size: 14px;
+            font-weight: 400;
+
+            .title {
+              font-size: 16px;
+              font-weight: 700;
+            }
+
+            .order-detail {
+              display: flex;
+              justify-content: space-between;
+            }
+
+            .total {
+              border-top: 1px solid var(--gray-2);
+              margin: 24px -24px 0 -24px;
+              padding: 0 24px;
+            }
+          }
+
+          .checkout {
+            background: var(--green);
+            border-radius: 4px;
+            border: none;
+            color: var(--white);
+            font-weight: 700;
+            padding: 10px 0;
+          }
+        }
       }
     }
   }
