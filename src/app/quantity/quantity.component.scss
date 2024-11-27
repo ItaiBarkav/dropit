@@ -1,0 +1,27 @@
+.quantity {
+  display: flex;
+  align-items: center;
+
+  * {
+    color: var(--gray-blue);
+    background: var(--gray-3);
+    border: none;
+    align-self: stretch;
+    align-content: center;
+  }
+
+  .increment {
+    padding-right: 8px;
+    border-radius: 0 12px 12px 0;
+  }
+
+  .decrement {
+    padding-left: 8px;
+    border-radius: 12px 0 0 12px;
+  }
+
+  .value {
+    padding: 0 4px;
+    line-height: 21px;
+  }
+}

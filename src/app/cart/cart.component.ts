@@ -40,7 +40,9 @@ export class CartComponent {
   openDialog(): void {
     this.cartService.submit();
 
-    const checkoutDialogRef = this.matDialog.open(CheckoutDialogComponent);
+    const checkoutDialogRef = this.matDialog.open(CheckoutDialogComponent, {
+      width: '397px',
+    });
     checkoutDialogRef
       .afterClosed()
       .pipe(map(() => this.router.navigateByUrl('/')))

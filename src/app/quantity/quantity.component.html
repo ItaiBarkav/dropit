@@ -1,5 +1,9 @@
-<div>
-  <button (click)="decrement()">-</button>
-  <span>{{ quantity }}</span>
-  <button (click)="increment()">+</button>
+<div class="quantity">
+  <button class="decrement" (click)="decrement()">
+    <img src="../../assets/Minus.svg" />
+  </button>
+  <span class="value">{{ quantity }}</span>
+  <button class="increment" (click)="increment()">
+    <img src="../../assets/Plus.svg" />
+  </button>
 </div>
